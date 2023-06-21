@@ -21,6 +21,7 @@ async function run() {
 
         const database = client.db('event_horizon');
         const usersCollection = database.collection('users');
+        const ordersCollection = database.collection('orders');
 
         // Add Users API
         app.post('/users', async (req, res) => {
@@ -33,11 +34,26 @@ async function run() {
             }
         })
 
-        // Get All The Users API
+        // Get Users API
         app.get('/users', async (req, res) => {
             const cursor = usersCollection.find({});
             const users = await cursor.toArray();
             res.send(users);
+        });
+
+
+        // Add Orders API
+        app.post('/orders', async (req, res) => {
+            const order = req.body;
+            const result = await ordersCollection.insertOne(order);
+            res.json(result);
+        });
+
+        // Get Orders API
+        app.get('/orders', async (req, res) => {
+            const cursor = ordersCollection.find({});
+            const orders = await cursor.toArray();
+            res.send(orders);
         });
 
 
