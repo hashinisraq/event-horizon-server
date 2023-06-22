@@ -60,7 +60,7 @@ async function run() {
         app.put('/orders', async (req, res) => {
             const data = req.body;
             const filter = { _id: data._id };
-            const updateDoc = { $set: { status: data.status } };
+            const updateDoc = { $set: { status: "cancelled" } };
             const result = await ordersCollection.updateOne(filter, updateDoc);
             res.json(result);
         });
