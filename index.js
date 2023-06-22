@@ -56,6 +56,14 @@ async function run() {
             res.send(orders);
         });
 
+        // Orders Cancel API
+        app.put('/orders', async (req, res) => {
+            const data = req.body;
+            const filter = { _id: data._id };
+            const updateDoc = { $set: { status: data.status } };
+            const result = await ordersCollection.updateOne(filter, updateDoc);
+            res.json(result);
+        });
 
 
     }
