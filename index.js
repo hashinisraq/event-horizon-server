@@ -70,8 +70,8 @@ async function run() {
         });
 
 
-        // Delete Customer API
-        app.delete('/delete_customer', async (req, res) => {
+        // Delete owner/customer API
+        app.delete('/delete_owner_customer', async (req, res) => {
             const data = req.body;
             const query = { email: data.email };
             const result = await usersCollection.deleteOne(query);
