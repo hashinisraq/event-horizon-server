@@ -58,10 +58,13 @@ async function run() {
 
         // Orders Cancel API
         app.put('/update_order', async (req, res) => {
-            const order = req.body;
-            console.log(order)
-            const filter = { _id: order._id };
-            const updateDoc = { $set: { status: order.status } };
+            const data = req.body;
+            const filter = {
+                customerName: data.customer,
+                Day: data.day,
+                Slot: data.timeSlot,
+            };
+            const updateDoc = { $set: { status: data.status } };
             const result = await ordersCollection.updateOne(filter, updateDoc);
             res.json(result);
         });
