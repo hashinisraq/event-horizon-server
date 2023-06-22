@@ -57,7 +57,7 @@ async function run() {
         });
 
         // Orders Cancel API
-        app.put('/update_order', async (req, res) => {
+        app.put('/cancel_order', async (req, res) => {
             const data = req.body;
             const filter = {
                 customerName: data.customer,
@@ -68,6 +68,15 @@ async function run() {
             const result = await ordersCollection.updateOne(filter, updateDoc);
             res.json(result);
         });
+
+
+        // Delete Customer API
+        app.delete('/delete_customer', async (req, res) => {
+            const data = req.body;
+            const query = { email: data.email };
+            const result = await usersCollection.deleteOne(query);
+            res.json(result);
+        })
 
 
     }
