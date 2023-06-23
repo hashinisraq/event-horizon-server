@@ -79,6 +79,19 @@ async function run() {
         })
 
 
+        // Venue accept/reject API
+        app.put('/venue_action', async (req, res) => {
+            const data = req.body;
+            const filter = {
+                'venues.name': data.venueName
+            };
+            const updateDoc = { $set: { 'venues.$.status': data.action } };
+            const result = await usersCollection.updateOne(filter, updateDoc);
+            res.json(result);
+        });
+
+
+
     }
 
     finally {
