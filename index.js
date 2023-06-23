@@ -34,6 +34,7 @@ async function run() {
             }
         })
 
+
         // Get Users API
         app.get('/users', async (req, res) => {
             const cursor = usersCollection.find({});
@@ -49,12 +50,14 @@ async function run() {
             res.json(result);
         });
 
+
         // Get Orders API
         app.get('/orders', async (req, res) => {
             const cursor = ordersCollection.find({});
             const orders = await cursor.toArray();
             res.send(orders);
         });
+
 
         // Orders Cancel API
         app.put('/cancel_order', async (req, res) => {
@@ -91,6 +94,21 @@ async function run() {
         });
 
 
+        // owner profile update 
+        app.put('/owner_profile', async (req, res) => {
+            const data = req.body;
+            const filter = {
+                email: data.emailAddress
+            };
+            const updateDoc = {
+                $set: {
+                    name: data.name,
+                    phoneNo: data.phoneNo
+                }
+            };
+            const result = await usersCollection.updateOne(filter, updateDoc);
+            res.json(result);
+        });
 
     }
 
