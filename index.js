@@ -117,7 +117,6 @@ async function run() {
             const data = req.body;
             const query = { email: data.email };
             const result = await usersCollection.updateOne(query, { $pull: { venues: data.venue } });
-            console.log(data)
             res.json(result);
         })
 
