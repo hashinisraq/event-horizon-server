@@ -120,6 +120,23 @@ async function run() {
             res.json(result);
         })
 
+
+        // Venue setup API
+        app.put('/venue_setup', async (req, res) => {
+            const data = req.body;
+            const filter = {
+                email: data.email
+            };
+            const updateDoc = {
+                $push: {
+                    "venues": data.venue
+                }
+            };
+            const result = await usersCollection.updateOne(filter, updateDoc);
+            res.json(result);
+        });
+
+
     }
 
     finally {
