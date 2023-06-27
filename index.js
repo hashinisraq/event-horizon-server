@@ -158,6 +158,26 @@ async function run() {
         });
 
 
+        // Order accepted/rejected API
+        app.put('/order_action', async (req, res) => {
+            const data = req.body;
+            const filter = {
+                venueName: data.order.venueName,
+                customerEmail: data.order.customerEmail,
+                Day: data.order.Day,
+                Slot: data.order.Slot
+            };
+            const updateDoc = {
+                $set: {
+                    status: data.action
+                }
+            };
+            const result = await ordersCollection.updateOne(filter, updateDoc);
+            res.json(result);
+        });
+
+
+
     }
 
     finally {
