@@ -94,7 +94,7 @@ async function run() {
         });
 
 
-        // owner profile update 
+        // Owner profile update 
         app.put('/owner_profile', async (req, res) => {
             const data = req.body;
             const filter = {
@@ -130,6 +130,27 @@ async function run() {
             const updateDoc = {
                 $push: {
                     "venues": data.venue
+                }
+            };
+            const result = await usersCollection.updateOne(filter, updateDoc);
+            res.json(result);
+        });
+
+        // Venue Update API
+        app.put('/venue_update', async (req, res) => {
+            const data = req.body;
+            const filter = {
+                email: data.emailAddress,
+                'venues.name': data.oldVenue
+            };
+            const updateDoc = {
+                $set: {
+                    'venues.$.name': data.venue.name,
+                    'venues.$.location': data.venue.location,
+                    'venues.$.capacity': data.venue.capacity,
+                    'venues.$.size': data.venue.size,
+                    'venues.$.amenities': data.venue.amenities,
+                    'venues.$.availability': data.venue.availability
                 }
             };
             const result = await usersCollection.updateOne(filter, updateDoc);
