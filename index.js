@@ -178,6 +178,24 @@ async function run() {
 
 
 
+        // Owner venue order API
+        app.post('/add_booking', async (req, res) => {
+            const order = req.body;
+            const userEmail = order.userEmail;
+            const venueName = order.venueName;
+            const bookedInfo = order.bookedInfo;
+            const result = await usersCollection.updateOne(
+                { email: userEmail, 'venues.name': venueName },
+                {
+                    $set: { 'venues.$.booked': true },
+                    $push: { 'venues.$.bookedInfo': bookedInfo }
+                }
+            );
+            res.json(result);
+        });
+
+
+
     }
 
     finally {
