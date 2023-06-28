@@ -146,6 +146,7 @@ async function run() {
             const updateDoc = {
                 $set: {
                     'venues.$.name': data.venue.name,
+                    'venues.$.venueRegNo': data.venue.venueRegNo,
                     'venues.$.venueImgLink': data.venue.venueImgLink,
                     'venues.$.location': data.venue.location,
                     'venues.$.capacity': data.venue.capacity,
