@@ -147,6 +147,7 @@ async function run() {
                 $set: {
                     'venues.$.name': data.venue.name,
                     'venues.$.venueRegNo': data.venue.venueRegNo,
+                    'venues.$.venuePrice': data.venue.venuePrice,
                     'venues.$.venueImgLink': data.venue.venueImgLink,
                     'venues.$.location': data.venue.location,
                     'venues.$.capacity': data.venue.capacity,
