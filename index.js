@@ -103,7 +103,8 @@ async function run() {
             const updateDoc = {
                 $set: {
                     name: data.name,
-                    phoneNo: data.phoneNo
+                    phoneNo: data.phoneNo,
+                    address: data.address
                 }
             };
             const result = await usersCollection.updateOne(filter, updateDoc);
