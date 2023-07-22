@@ -34,10 +34,10 @@ async function run() {
                 total_amount: req.body.total_amount,
                 currency: 'BDT',
                 tran_id: tran_id,
-                success_url: 'http://localhost:5000/success',
-                fail_url: 'http://localhost:5000/fail',
-                cancel_url: 'http://localhost:5000/cancel',
-                ipn_url: 'http://localhost:5000/ipn',
+                success_url: 'https://event-horizon-8f3s.onrender.com/success',
+                fail_url: 'https://event-horizon-8f3s.onrender.com/fail',
+                cancel_url: 'https://event-horizon-8f3s.onrender.com/cancel',
+                ipn_url: 'https://event-horizon-8f3s.onrender.com/ipn',
                 shipping_method: 'Online transaction',
                 product_name: req.body.product_name,
                 product_image: req.body.product_image,
@@ -73,7 +73,7 @@ async function run() {
 
             const order = await ordersCollection.insertOne(req.body.order);
 
-            const sslcommer = new SSLCommerzPayment(process.env.STORE_ID, process.env.STORE_PASSWORD, false) //true for live default false for sandbox
+            const sslcommer = new SSLCommerzPayment(process.env.STORE_ID, process.env.STORE_PASSWORD, true) //true for live default false for sandbox
             sslcommer.init(data).then(data => {
                 if (data.GatewayPageURL) {
                     res.json(data.GatewayPageURL)
