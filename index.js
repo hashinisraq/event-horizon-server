@@ -94,20 +94,20 @@ async function run() {
                 }
             });
 
-            res.redirect(`http://localhost:3000/success/${req.body.val_id}`)
+            res.redirect(`https://eventhorizon2023.netlify.app/success/${req.body.val_id}`)
         })
 
 
         // Payment fail
         app.post('/fail', async (req, res) => {
             const result = await ordersCollection.deleteOne({ tran_id: req.body.tran_id });
-            res.status(400).redirect('http://localhost:3000');
+            res.status(400).redirect('https://eventhorizon2023.netlify.app');
         })
 
         // Payment success
         app.post('/cancel', async (req, res) => {
             const result = await ordersCollection.deleteOne({ tran_id: req.body.tran_id });
-            res.status(400).redirect('http://localhost:3000');
+            res.status(400).redirect('https://eventhorizon2023.netlify.app');
         })
 
 
