@@ -73,7 +73,7 @@ async function run() {
 
             const order = await ordersCollection.insertOne(req.body.order);
 
-            const sslcommer = new SSLCommerzPayment(process.env.STORE_ID, process.env.STORE_PASSWORD, true) //true for live default false for sandbox
+            const sslcommer = new SSLCommerzPayment(process.env.STORE_ID, process.env.STORE_PASSWORD, false) //true for live default false for sandbox
             sslcommer.init(data).then(data => {
                 if (data.GatewayPageURL) {
                     res.json(data.GatewayPageURL)
