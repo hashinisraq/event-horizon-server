@@ -34,10 +34,10 @@ async function run() {
                 total_amount: req.body.total_amount,
                 currency: 'BDT',
                 tran_id: tran_id,
-                success_url: 'https://event-horizon-8f3s.onrender.com/success',
-                fail_url: 'https://event-horizon-8f3s.onrender.com/fail',
-                cancel_url: 'https://event-horizon-8f3s.onrender.com/cancel',
-                ipn_url: 'https://event-horizon-8f3s.onrender.com/ipn',
+                success_url: 'http://localhost:5000/success',
+                fail_url: 'http://localhost:5000/fail',
+                cancel_url: 'http://localhost:5000/cancel',
+                ipn_url: 'http://localhost:5000/ipn',
                 shipping_method: 'Online transaction',
                 product_name: req.body.product_name,
                 product_image: req.body.product_image,
@@ -94,20 +94,20 @@ async function run() {
                 }
             });
 
-            res.redirect(`https://eventhorizon2023.netlify.app/success/${req.body.val_id}`)
+            res.redirect(`http://localhost:3000/success/${req.body.val_id}`)
         })
 
 
         // Payment fail
         app.post('/fail', async (req, res) => {
             const result = await ordersCollection.deleteOne({ tran_id: req.body.tran_id });
-            res.status(400).redirect('https://eventhorizon2023.netlify.app');
+            res.status(400).redirect('http://localhost:3000');
         })
 
         // Payment success
         app.post('/cancel', async (req, res) => {
             const result = await ordersCollection.deleteOne({ tran_id: req.body.tran_id });
-            res.status(400).redirect('https://eventhorizon2023.netlify.app');
+            res.status(400).redirect('http://localhost:3000');
         })
 
 
